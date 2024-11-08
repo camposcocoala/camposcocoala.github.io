@@ -1,53 +1,60 @@
 $(document).ready(function() {
-    updateCount();
+  const divs = ['#div1', '#div2', '#div3'];
 
-    $('.close').click(function() {
-        $(this).closest('.warning').hide();
-        updateCount();
-        updateVisibility();
-    });
+  function updateCounts() {
+    const uncheckedCount = divs.filter(id => $(id).hasClass('unchecked')).length;
+    $('.first').text(`Te faltan ${uncheckedCount} características`);
 
-    $('.check').change(function() {
-        if ($(this).is(':checked')) {
-            $(this).closest('.warning').hide();
-        }
-        updateCount();
-        updateVisibility();
-    });
+    if (uncheckedCount === 0) {
+      $('.first').hide();
+      $('.second').show();
+    } else {
+      $('.first').show();
+      $('.second').hide();
+    }
+  }
 
-    setInterval(function() {
-        if ($('.warning:visible').length === 0) {
-            let uncheckedDivs = $('.warning').filter(function() {
-                return !$(this).find('.check').is(':checked');
-            });
-            if (uncheckedDivs.length > 0) {
-                let randomDiv = uncheckedDivs.eq(Math.floor(Math.random() * uncheckedDivs.length));
-                randomDiv.show();
-            }
-        }
-        updateVisibility();
-    }, 3000);
+  function toggleParagraphVisibility() {
+    const visibleDiv = divs.some(id => !$(id).hasClass('hidden'));
+    $('.first').css('display', visibleDiv ? 'none' : 'block');
+  }
 
-    function updateCount() {
-        let uncheckedCount = $('.check').not(':checked').length;
-        $('#count').text(uncheckedCount);
-        if (uncheckedCount === 0) {
-            $('.first').hide();
-            $('.second').removeClass('hidden');
-        } else {
-            $('.first').show();
-            $('.second').addClass('hidden');
-        }
-        updateVisibility();
+  function showRandomDiv() {
+    toggleParagraphVisibility();
+
+    const visibleDiv = divs.some(id => !$(id).hasClass('hidden'));
+    if (visibleDiv) {
+      return;
     }
 
-    function updateVisibility() {
-        if ($('.second').is(':visible')) {
-            $('.first').hide();
-        } else if ($('.warning:visible').length > 0) {
-            $('.first').hide();
-        } else {
-            $('.first').show();
-        }
+    const uncheckedDivs = divs.filter(id => $(id).hasClass('unchecked'));
+    if (uncheckedDivs.length === 0) {
+      return;
     }
+    const randomDiv = uncheckedDivs[Math.floor(Math.random() * uncheckedDivs.length)];
+    $(randomDiv).removeClass('hidden');
+
+    const checkbox = $(randomDiv).find('.state-checkbox');
+    checkbox.prop('checked', false);
+    checkbox.off('change').on('change', function() {
+      if (checkbox.is(':checked')) {
+        $(randomDiv).addClass('checked').removeClass('unchecked hidden');
+        updateCounts();
+        toggleParagraphVisibility();
+      }
+    });
+
+    const closeButton = $(randomDiv).find('.close-button');
+    closeButton.off('click').on('click', function() {
+      $(randomDiv).addClass('hidden');
+      updateCounts();
+      toggleParagraphVisibility();
+    });
+
+    updateCounts();
+    toggleParagraphVisibility();
+  }
+
+  setInterval(showRandomDiv, 3000);
+  updateCounts(); // Actualiza el contador al cargar la página
 });
