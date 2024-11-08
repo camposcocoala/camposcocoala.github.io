@@ -1,5 +1,12 @@
 $(document).ready(function() {
+    // Initial state on page load
+    $('.warning').hide();
+    $('.check').prop('checked', false);
+    $('.first').show();
+    $('.second').addClass('hidden');
+
     updateCount();
+    updateVisibility();
 
     $('.close').click(function() {
         $(this).closest('.warning').hide();
