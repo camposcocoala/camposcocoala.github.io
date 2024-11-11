@@ -1,51 +1,71 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-}
+ .advertencia { 
+   position: relative;
+   background-color: tomato;
+   border-radius: 15px;
+   padding: 6px;
+   color: white;
+   text-align: center; 
+   font-weight: bold;
+   width: 600px;
+   } 
 
+.contenido { 
+  background-color: white;
+  padding: 10px; color: 
+  black; margin-top: 10px; 
+}
 .container {
-    text-align: center;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-.warning {
-    display: none;
-    background-color: #ffdddd;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ff0000;
-    border-radius: 5px;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: Aria
 }
-
-.hidden {
-    display: none;
-}
-
-button.close {
-    background-color: #ff0000;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
+    .close {
+  position: absolute;
+  top: 1px; 
+  right: 10px;
+  background-color: tomato;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  }
 button.close:hover {
     background-color: #cc0000;
 }
-
-input.check {
-    margin-left: 10px;
+.parentesis {
+  font-size: 11px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 120;
+}
+.rubik {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 20px;
+  letter-spacing: 0.5px;
 }
 
-p.first, p.second {
-    margin: 10px 0;
+.parrafo {
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-weight: 300; 
+}
+footer{
+  text-align: right;
 }
