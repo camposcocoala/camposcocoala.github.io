@@ -1,4 +1,4 @@
- .advertencia { 
+ .advertencia1,.advertencia2,.advertencia3 { 
    position: relative;
    background-color: tomato;
    border-radius: 15px;
@@ -7,6 +7,7 @@
    text-align: center; 
    font-weight: bold;
    width: 600px;
+   display: none;
    } 
 
 .contenido { 
@@ -68,4 +69,7 @@ button.close:hover {
 }
 footer{
   text-align: right;
+}
+.secondhidden {
+  display: none;
 }
