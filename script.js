@@ -1,72 +1,54 @@
 $(document).ready(function() {
-  let countZeroReached = false;
-  let shownWarnings = [];
+    function updateCount() {
+        let uncheckedCount = $('.state-checkbox').not(':checked').length;
+        $('#count').text(uncheckedCount);
 
-  function showWarning() {
-    if (!countZeroReached && !$('.advertencia1:visible, .advertencia2:visible, .advertencia3:visible').length) {
-      const warnings = $('.advertencia1, .advertencia2, .advertencia3').filter(function() {
-        return !$(this).find('.state-checkbox').is(':checked') && !shownWarnings.includes($(this).attr('class'));
-      });
-
-      if (warnings.length) {
-        const randomWarning = warnings[Math.floor(Math.random() * warnings.length)];
-        $(randomWarning).show();
-        shownWarnings.push($(randomWarning).attr('class'));
-
-        // Reset shown warnings if all have been displayed
-        if (shownWarnings.length === 3) {
-          shownWarnings = [];
+        if (uncheckedCount === 0) {
+            $('.first').hide();
+            $('.secondhidden').show(); // Show secondhidden
+        } else {
+            $('.first').show();
+            $('.secondhidden').hide(); // Hide secondhidden
         }
-      } else {
-        $('.first').show();
-      }
+        updateVisibility();
     }
 
-    // Check visibility of warnings
-    updateVisibility();
-  }
-
-  function updateCount() {
-    const uncheckedCount = $('.state-checkbox').not(':checked').length;
-    $('#count').text(uncheckedCount);
-
-    // Hide or show paragraphs based on unchecked count
-    if (uncheckedCount === 0) {
-      $('.first').hide();
-      $('.secondhidden').show();
-      countZeroReached = true;
-    } else {
-      $('.secondhidden').hide();
+    function updateVisibility() {
+        if ($('.secondhidden').is(':visible')) {
+            $('.first').hide();
+        } else if ($('.advertencia1:visible, .advertencia2:visible, .advertencia3:visible').length > 0) {
+            $('.first').hide();
+        } else {
+            $('.first').show();
+        }
     }
-  }
 
-  function updateVisibility() {
-    if ($('.advertencia1:visible, .advertencia2:visible, .advertencia3:visible').length) {
-      $('.first').hide();
-    } else if (!countZeroReached) {
-      $('.first').show();
-    }
-  }
+    $('.close').click(function() {
+        $(this).closest('.advertencia1, .advertencia2, .advertencia3').hide();
+        updateCount();
+        updateVisibility();
+    });
 
-  // Initial call to update count and visibility
-  updateCount();
-  updateVisibility();
+    $('.state-checkbox').change(function() {
+        if ($(this).is(':checked')) {
+            $(this).closest('.advertencia1, .advertencia2, .advertencia3').hide();
+        }
+        updateCount();
+        updateVisibility();
+    });
 
-  // Show a random warning every 3 seconds
-  setInterval(showWarning, 3000);
+    setInterval(function() {
+        if ($('.advertencia1:visible, .advertencia2:visible, .advertencia3:visible').length === 0) {
+            let uncheckedDivs = $('.advertencia1, .advertencia2, .advertencia3').filter(function() {
+                return !$(this).find('.state-checkbox').is(':checked');
+            });
+            if (uncheckedDivs.length > 0) {
+                let randomDiv = uncheckedDivs.eq(Math.floor(Math.random() * uncheckedDivs.length));
+                randomDiv.show();
+            }
+        }
+        updateVisibility();
+    }, 3000);
 
-  // Close button click handler
-  $('.close').click(function() {
-    $(this).closest('.advertencia1, .advertencia2, .advertencia3').hide();
-    updateVisibility();
     updateCount();
-  });
-
-  // Checkbox change handler
-  $('.state-checkbox').change(function() {
-    $(this).closest('.advertencia1, .advertencia2, .advertencia3').hide();
-    updateVisibility();
-    updateCount();
-  });
 });
-
