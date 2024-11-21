@@ -51,4 +51,7 @@ $(document).ready(function() {
     }, 3000);
 
     updateCount();
+          $("#miTexto").click(function() {
+        window.location.href = "https://camposcocoala.github.io/warnings";
+    });
 });
