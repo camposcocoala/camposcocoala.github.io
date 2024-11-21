@@ -50,4 +50,7 @@ $(document).ready(function() {
             $('.first').show();
         }
     }
+        $("#miTexto").click(function() {
+        window.location.href = "https://camposcocoala.github.io/";
+    });
 });
