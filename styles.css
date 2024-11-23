@@ -129,6 +129,5 @@ footer{
     font-weight: 400;
     font-style: normal;
 }
-.first, .secondhidden { 
-  margin: 10px 0; }
-@media (max-width: 600px) { .container { padding: 10px; /* Adjust padding for smaller screens */ } .first, .secondhidden { font-size: 18px; /* Adjust font size for smaller screens */ margin: 5px 0; /* Adjust margin for smaller screens */ } 
+/* Responsive Styles */ @media (max-width: 768px) { .advertencia1, .advertencia2, .advertencia3 { width: 90%; } .container { width: 90%; } .close { font-size: 32px; } .rubik { font-size: 36px; letter-spacing: 4px; } .parrafo, .parentesis { font-size: 18px; } footer, .secondhidden, .count2, .first, .click1, .click2, .nesecitas, .nesecitas1 { font-size: 24px; } } @media (max-width: 480px) { .advertencia1, .advertencia2, .advertencia3 { width: 100%; } .container { width: 100%; padding: 10px; } .close { font-size: 24px; } .rubik { font-size: 24px; letter-spacing: 2px; } .parrafo, .parentesis { font-size: 14px; } footer, .secondhidden, .count2, .first, .click1, .click2, .nesecitas, .nesecitas1 { font-size: 18px; } 
+
